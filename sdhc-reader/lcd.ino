@@ -45,10 +45,17 @@ void LcdInitialise(void) {
   LcdWrite(LCD_C, 0x0C );  // LCD in normal mode.
 }
 
-void LcdString(char *characters) {
+void LcdString(char *characters, boolean full_line, char left_in_line) {
+  char counter = 0;
   while (*characters)
   {
     LcdCharacter(*characters++);
+    counter++;
+  }
+  if (!full_line) return;
+  while (counter < left_in_line) {
+    LcdCharacter(' ');
+    counter++;
   }
 }
 

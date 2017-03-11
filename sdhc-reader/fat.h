@@ -6,5 +6,6 @@
 char* f32_init();
 void f32_seek(unsigned long offset);
 char f32_read(unsigned char bytes);
+void print_file();
 
 #endif

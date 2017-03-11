@@ -14,9 +14,7 @@ typedef struct {
     unsigned char filename[8];
     unsigned char ext[3];
     unsigned char attributes;
-    unsigned char reserved[10];
-    unsigned short modify_time;
-    unsigned short modify_date;
+    unsigned char reserved[14];
     unsigned short starting_cluster;
     unsigned long file_size;
 } FileEntry;
@@ -35,13 +33,11 @@ typedef struct {
   unsigned char sectors_per_cluster;
   unsigned short reserved_sectors;
   unsigned char number_of_fats;
-  unsigned short root_dir_entries;
-  unsigned short total_sectors_short; // if zero, later field is used
-  unsigned char media_descriptor;
-  unsigned short fat_size_sectors;
+  unsigned char placeholder[19];
+  unsigned long sectors_per_fat;
 } FatBootSector;
 
-unsigned char f32_buffer[64];
+unsigned char f32_buffer[512];
 FatState fat_state;
 
 #define F32_PART ((PartitionTable *)((void *)f32_buffer))
